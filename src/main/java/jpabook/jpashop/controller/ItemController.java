@@ -46,18 +46,18 @@ public class ItemController {
     }
 
     @GetMapping("items/{itemId}/edit")
-    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
-        Book item = (Book) itemService.findOne(itemId);
+    public String updateItemForm(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
 
-        BookForm form = new BookForm();
-        form.setId(item.getId());
-        form.setName(item.getName());
-        form.setPrice(item.getPrice());
-        form.setStockQuantity(item.getStockQuantity());
-        form.setAuthor(item.getAuthor());
-        form.setIsbn(item.getIsbn());
+//        BookForm form = new BookForm();
+//        form.setId(item.getId());
+//        form.setName(item.getName());
+//        form.setPrice(item.getPrice());
+//        form.setStockQuantity(item.getStockQuantity());
+//        form.setAuthor(item.getAuthor());
+//        form.setIsbn(item.getIsbn());
 
-        model.addAttribute("form", form);
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
+
         return "items/updateItemForm";
     }
 
